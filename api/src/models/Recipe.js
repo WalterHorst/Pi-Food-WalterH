@@ -7,9 +7,9 @@ module.exports = (sequelize) => {
     "Recipe",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncremet: true,
         allowNull: false,
       },
       name: {
@@ -18,10 +18,10 @@ module.exports = (sequelize) => {
       },
       imagen: { type: DataTypes.STRING, allowNull: false },
       resumen: { type: DataTypes.TEXT, allowNull: false },
-      HealtScore: { type: DataTypes.INTEGER, allowNull: false },
+      healtScore: { type: DataTypes.INTEGER, allowNull: false },
       Pasos: { type: DataTypes.TEXT, allowNull: false },
     },
-    { timestamp: true }
+    { timestamps: false }
   );
 };
 
