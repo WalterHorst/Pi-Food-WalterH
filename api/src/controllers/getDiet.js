@@ -1,3 +1,8 @@
+const axios = require("axios");
+const { Diet } = require("../db");
+require("dotenv").config();
+const { API_KEY } = process.env;
+
 const getDiet = async (req, res) => {
   try {
     res.status(200).send("Esta ruta trae todas las diestas");

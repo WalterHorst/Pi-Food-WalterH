@@ -20,6 +20,10 @@ module.exports = (sequelize) => {
       resumen: { type: DataTypes.TEXT, allowNull: false },
       healtScore: { type: DataTypes.INTEGER, allowNull: false },
       Pasos: { type: DataTypes.TEXT, allowNull: false },
+      created: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
     },
     { timestamps: false }
   );
