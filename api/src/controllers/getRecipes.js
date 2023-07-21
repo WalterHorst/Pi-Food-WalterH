@@ -9,7 +9,7 @@ const getRecipes = async (req, res) => {
     const databaseRecipes = await Recipe.findAll();
     //Busco todos los usuarios de la api
     const { data } = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=90`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`
     );
 
     const apiRecipes = data.results.map((recipe) => ({

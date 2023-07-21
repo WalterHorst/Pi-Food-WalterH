@@ -1,0 +1,6 @@
+.NavBar{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(21, 179, 179);
+    border: solid;
+}
