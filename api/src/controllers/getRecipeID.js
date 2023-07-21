@@ -23,6 +23,10 @@ const getRecipeById = async (req, res) => {
         image: data.image,
         summary: data.summary,
         healthScore: data.healthScore,
+        pasos:
+          data.analyzedInstructions?.[0]?.steps
+            .map((step) => step.step)
+            .join(" ") || "No hay pasos aca rey",
       };
       return res.status(200).json(recipeApi);
     }

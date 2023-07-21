@@ -5,18 +5,14 @@ module.exports = (sequelize) => {
     "Diet",
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
-      created: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
       },
     },
     { timestamps: false }
