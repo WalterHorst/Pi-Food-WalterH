@@ -1,14 +1,13 @@
 const validate = (form) => {
   const errors = {};
 
-  // Validar el campo nombre (solo debe contener caracteres)
-  if (/^[A-Za-z\s\-()']+$/.test(form.nombre)) {
-    errors.nombre = ""; // Si es válido, se elimina el mensaje de error
+  // Validar el campo name (solo debe contener caracteres)
+  if (/^[A-Za-z\s\-()']+$/.test(form.name)) {
+    errors.name = ""; // Si es válido, se elimina el mensaje de error
+  } else if (form.name === "") {
+    errors.name = "El nombre la receta no puede estar vacío.";
   } else {
-    errors.nombre = "El nombre de la receta solo debe contener caracteres.";
-  }
-  if (errors.nombre === "") {
-    errors.nombre = "Este campo no puede estar vacio";
+    errors.name = "El nombre de la receta solo debe contener caracteres.";
   }
 
   // Validar el campo Resumen (no debe estar vacio)
@@ -19,16 +18,16 @@ const validate = (form) => {
   }
 
   // Validar el campo healtScore (debe ser un valor entre 1 y 10)
-  const healtScoreValue = parseInt(form.healtScore);
+  const healthScoreValue = parseInt(form.healthScore);
   if (
-    !isNaN(healtScoreValue) &&
-    healtScoreValue >= 1 &&
-    healtScoreValue <= 10
+    !isNaN(healthScoreValue) &&
+    healthScoreValue >= 1 &&
+    healthScoreValue <= 100
   ) {
-    errors.healtScore = ""; // Si es válido, se elimina el mensaje de error
+    errors.healthScore = ""; // Si es válido, se elimina el mensaje de error
   } else {
-    errors.healtScore =
-      "El valor de Health Score debe ser un número entre 1 y 10.";
+    errors.healthScore =
+      "El valor de Health Score debe ser un número entre 1 y 100.";
   }
 
   // Validar el campo pasos (no debe estar vacío)

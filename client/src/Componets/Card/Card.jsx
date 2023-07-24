@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import "./Card.css";
 
-const Card = ({ Image, Nombre, HealthScore }) => {
+const Card = ({ image, Nombre, HealthScore }) => {
   return (
     <div className="Card">
-      <Link to={"/detail"}>Nombre:{Nombre}</Link>
+      <Link to={"/detail"}>{Nombre}</Link>
       <p>HealthScore:{HealthScore}</p>
-      <img src={Image} alt={Nombre} />
+      <img src={image} alt={Nombre} />
     </div>
   );
 };

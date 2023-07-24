@@ -1,22 +1,23 @@
 import { useState } from "react";
 import "./Form.css";
 import validate from "../../validations";
+import axios from "axios";
 
 const Form = () => {
   const [form, setForm] = useState({
-    nombre: "",
+    name: "",
     resumen: "",
-    healtScore: "",
+    healthScore: "",
     pasos: "",
-    imagen: "",
+    image: "",
   });
 
   const [errors, setErrors] = useState({
-    nombre: "",
+    name: "",
     resumen: "",
-    healtScore: "",
+    healthScore: "",
     pasos: "",
-    imagen: "",
+    image: "",
   });
 
   const changeHandler = (event) => {
@@ -31,9 +32,13 @@ const Form = () => {
     return Object.values(errors).every((error) => error === "");
   };
 
-  //funcion que previene el comportamiento default del submit (recargado de pagina)
+  //funcion que previene el comportamiento default del submit (recargado de pagina) y hace la peticion post al backend
   const submitHandler = (event) => {
     event.preventDefault();
+    axios
+      .post("http://localhost:3001/recipes", form)
+      .then((res) => alert(res.data))
+      .catch((error) => alert(error));
   };
 
   return (
@@ -41,12 +46,12 @@ const Form = () => {
       <div className="container">
         <input
           type="text"
-          placeholder="Nombre"
-          value={form.nombre}
-          name="nombre"
+          placeholder="name"
+          value={form.name}
+          name="name"
           onChange={changeHandler}
         ></input>
-        {errors.nombre && <p className="p">{errors.nombre}</p>}
+        {errors.name && <p className="p">{errors.name}</p>}
       </div>
       <div className="container">
         <input
@@ -62,11 +67,11 @@ const Form = () => {
         <input
           type="number"
           placeholder="HealtScore"
-          value={form.healtScore}
-          name="healtScore"
+          value={form.healthScore}
+          name="healthScore"
           onChange={changeHandler}
         ></input>
-        {errors.healtScore && <p className="p">{errors.healtScore}</p>}
+        {errors.healthScore && <p className="p">{errors.healthScore}</p>}
       </div>
       <div className="container">
         <input
@@ -81,8 +86,8 @@ const Form = () => {
       <div className="container">
         <input
           type="file"
-          value={form.imagen}
-          name="imagen"
+          value={form.image}
+          name="image"
           onChange={changeHandler}
         ></input>
       </div>

@@ -16,10 +16,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      imagen: { type: DataTypes.STRING, allowNull: false },
+      image: { type: DataTypes.STRING, allowNull: false },
       resumen: { type: DataTypes.TEXT, allowNull: false },
-      healtScore: { type: DataTypes.INTEGER, allowNull: false },
-      Pasos: { type: DataTypes.TEXT, allowNull: false },
+      healthScore: { type: DataTypes.INTEGER, allowNull: false },
+      pasos: { type: DataTypes.TEXT, allowNull: false },
       created: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,

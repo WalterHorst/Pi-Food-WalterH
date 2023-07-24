@@ -2,16 +2,16 @@ const { Recipe } = require("../db");
 
 const newRecipe = async (req, res) => {
   try {
-    const { name, imagen, resumen, healtScore, Pasos } = req.body;
+    const { name, image, resumen, healthScore, pasos } = req.body;
 
     const newRecipe = await Recipe.create({
       name,
-      imagen,
+      image,
       resumen,
-      healtScore,
-      Pasos,
+      healthScore,
+      pasos,
     });
-    res.status(200).json(newRecipe);
+    res.status(200).send("Receta creada exitosamente");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

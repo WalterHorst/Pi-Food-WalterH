@@ -10,7 +10,7 @@ const CardsContainer = () => {
         return (
           <Card
             image={recipe.image}
-            Nombre={recipe.title}
+            Nombre={recipe.name}
             HealthScore={recipe.healthScore}
           />
         );
