@@ -39,6 +39,8 @@ const Form = () => {
       .post("http://localhost:3001/recipes", form)
       .then((res) => alert(res.data))
       .catch((error) => alert(error));
+
+    setForm({ name: "", resumen: "", healthScore: "", pasos: "", image: "" });
   };
 
   return (
@@ -51,7 +53,7 @@ const Form = () => {
           name="name"
           onChange={changeHandler}
         ></input>
-        {errors.name && <p className="p">{errors.name}</p>}
+        {errors.name && <p className="parrafo3">{errors.name}</p>}
       </div>
       <div className="container">
         <input
@@ -61,7 +63,7 @@ const Form = () => {
           name="resumen"
           onChange={changeHandler}
         ></input>
-        {errors.resumen && <p className="p">{errors.resumen}</p>}
+        {errors.resumen && <p className="parrafo3">{errors.resumen}</p>}
       </div>
       <div className="container">
         <input
@@ -71,7 +73,7 @@ const Form = () => {
           name="healthScore"
           onChange={changeHandler}
         ></input>
-        {errors.healthScore && <p className="p">{errors.healthScore}</p>}
+        {errors.healthScore && <p className="parrafo3">{errors.healthScore}</p>}
       </div>
       <div className="container">
         <input
@@ -81,7 +83,7 @@ const Form = () => {
           name="pasos"
           onChange={changeHandler}
         ></input>
-        {errors.pasos && <p className="p">{errors.pasos}</p>}
+        {errors.pasos && <p className="parrafo3">{errors.pasos}</p>}
       </div>
       <div className="container">
         <input

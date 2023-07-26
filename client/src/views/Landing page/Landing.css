@@ -1,0 +1,57 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+.landing-Page{
+
+min-height: 100vh; 
+background-image: url("https://images6.alphacoders.com/130/1308741.jpg"); /* Cambiar 'ruta-de-tu-imagen.jpg' por la ruta de tu imagen de fondo */
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+display: flex;
+align-items: center;
+flex-direction: column;
+justify-content:space-between;
+color: #fff;
+padding: 2rem;
+}
+
+header {
+    text-align: center;
+  }
+  
+  .parrafo1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .parafo2 {
+    font-size: 1.2rem;
+  }
+  
+  /* Estilos del pie de página */
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Agrega un fondo semitransparente para que el texto sea legible */
+    width: 100%; 
+  }
+
+
+  .botonLanding{
+    background-color: #10cfc283;
+    color: #fff;
+    padding: 10px 80px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    
+  }
+
+  .botonLanding:hover {
+    background-color: #10cfc2c0;
+  }

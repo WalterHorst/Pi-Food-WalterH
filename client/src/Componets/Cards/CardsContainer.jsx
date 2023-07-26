@@ -9,6 +9,7 @@ const CardsContainer = () => {
       {recipes.map((recipe) => {
         return (
           <Card
+            key={recipe.id}
             image={recipe.image}
             Nombre={recipe.name}
             HealthScore={recipe.healthScore}
