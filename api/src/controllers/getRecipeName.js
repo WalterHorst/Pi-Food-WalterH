@@ -4,6 +4,12 @@ require("dotenv").config();
 const { API_KEY } = process.env;
 const { Op } = require("sequelize");
 
+const removeHTMLTags = (text) => {
+  // Expresión regular para buscar y eliminar las etiquetas HTML
+  const regex = /(<([^>]+)>)/gi;
+  return text.replace(regex, "");
+};
+
 const getRecipeByName = async (req, res) => {
   try {
     const { name } = req.query;
@@ -24,14 +30,22 @@ const getRecipeByName = async (req, res) => {
     });
 
     const { data } = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}&addRecipeInformation=true`
     );
-    const apiRecipes = data.results.filter((recipe) =>
-      recipe.title.toLowerCase().includes(name.toLowerCase())
-    );
-
+    const recipeApi = data.results.map((recipe) => ({
+      id: recipe.id,
+      name: recipe.title.toLowerCase(),
+      image: recipe.image,
+      summary: removeHTMLTags(recipe.summary),
+      healthScore: recipe.healthScore,
+      dietas: recipe.diets,
+      pasos:
+        recipe.analyzedInstructions?.[0]?.steps
+          .map((step) => step.step)
+          .join(" ") || "No hay pasos aca rey",
+    }));
     // Combinar las recetas de la base de datos y la API
-    const allRecipes = [...dbRecipes, ...apiRecipes];
+    const allRecipes = [...dbRecipes, ...recipeApi];
 
     if (allRecipes.length === 0) {
       return res.status(404).send("No se encontraron recetas con ese nombre.");

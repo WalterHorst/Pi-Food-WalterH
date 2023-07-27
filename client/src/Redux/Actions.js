@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_RECIPES = "GET_RECIPES";
+export const SET_FOUND_RECIPE = "SET_FOUND_RECIPE";
 
 export const getRecipes = () => {
   return async (dispatch) => {
@@ -8,5 +9,12 @@ export const getRecipes = () => {
 
     const apiRecipes = data;
     dispatch({ type: GET_RECIPES, payload: apiRecipes });
+  };
+};
+
+export const setFoundRecipe = (recipe) => {
+  return {
+    type: SET_FOUND_RECIPE,
+    payload: recipe,
   };
 };

@@ -3,6 +3,12 @@ const { API_KEY } = process.env;
 const { Recipe } = require("../db");
 const axios = require("axios");
 
+const removeHTMLTags = (text) => {
+  // Expresión regular para buscar y eliminar las etiquetas HTML
+  const regex = /(<([^>]+)>)/gi;
+  return text.replace(regex, "");
+};
+
 const getRecipeById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -17,12 +23,14 @@ const getRecipeById = async (req, res) => {
       const { data } = await axios.get(
         `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
       );
+
       const recipeApi = {
         id: data.id,
         name: data.title.toLowerCase(),
         image: data.image,
-        summary: data.summary,
+        summary: removeHTMLTags(data.summary),
         healthScore: data.healthScore,
+        dietas: data.diets,
         pasos:
           data.analyzedInstructions?.[0]?.steps
             .map((step) => step.step)
