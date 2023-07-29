@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_RECIPES = "GET_RECIPES";
 export const SET_FOUND_RECIPE = "SET_FOUND_RECIPE";
+export const ORDER = "ORDER";
 
 export const getRecipes = () => {
   return async (dispatch) => {
@@ -17,4 +18,8 @@ export const setFoundRecipe = (recipe) => {
     type: SET_FOUND_RECIPE,
     payload: recipe,
   };
+};
+
+export const orderCards = (order) => {
+  return { type: ORDER, payload: order };
 };

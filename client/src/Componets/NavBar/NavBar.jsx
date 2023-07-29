@@ -18,7 +18,7 @@ const NavBar = () => {
         Home
       </Link>
       <Search></Search>
-      <Link to={"/create"}>Form</Link>
+      <Link to={"/create"}>Crear</Link>
       <Link to={"/"}>Salir</Link>
     </div>
   );

@@ -12,8 +12,8 @@ const CardsContainer = () => {
             key={recipe.id}
             id={recipe.id}
             image={recipe.image}
-            Nombre={recipe.name}
-            HealthScore={recipe.healthScore}
+            nombre={recipe.name}
+            dietas={recipe.diets}
           />
         );
       })}

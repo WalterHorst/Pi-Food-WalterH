@@ -17,6 +17,7 @@ const getRecipes = async (req, res) => {
       name: recipe.title,
       image: recipe.image,
       summary: recipe.summary,
+      diets: recipe.diets,
       healthScore: recipe.healthScore,
       pasos:
         recipe.analyzedInstructions?.[0]?.steps
