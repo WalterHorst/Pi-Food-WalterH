@@ -1,4 +1,9 @@
-import { GET_RECIPES, SET_FOUND_RECIPE, ORDER } from "./Actions";
+import {
+  GET_RECIPES,
+  SET_FOUND_RECIPE,
+  ORDER,
+  ORDER_BY_DIETS,
+} from "./Actions";
 
 const initialState = {
   recipes: [],
@@ -12,7 +17,6 @@ const reducer = (state = initialState, { type, payload }) => {
     case SET_FOUND_RECIPE:
       return { ...state, recipes: payload };
 
-   
     case ORDER:
       const recipesCopy = [...state.recipes];
       const sortedRecipes = recipesCopy.sort((a, b) => {
@@ -30,6 +34,17 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         recipes: sortedRecipes,
       };
+
+    case ORDER_BY_DIETS:
+      const recipeCopy = [...state.recipes];
+      const filteredRecipes = state.recipes.filter((recipe) =>
+        recipe.diets.includes(payload)
+      );
+      if (filteredRecipes.length === 0) {
+        alert("No se encuentran recetas con ese tipo de dieta");
+        return { ...state, recipes: recipeCopy };
+      }
+      return { ...state, recipes: filteredRecipes };
 
     default:
       return { ...state };

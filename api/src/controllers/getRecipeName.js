@@ -36,6 +36,7 @@ const getRecipeByName = async (req, res) => {
       id: recipe.id,
       name: recipe.title.toLowerCase(),
       image: recipe.image,
+      diets: recipe.diets,
       summary: removeHTMLTags(recipe.summary),
       healthScore: recipe.healthScore,
       dietas: recipe.diets,

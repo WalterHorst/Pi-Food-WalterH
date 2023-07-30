@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import CardsContainer from "../../Componets/Cards/CardsContainer";
 import { getRecipes } from "../../Redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
-import { orderCards } from "../../Redux/Actions";
+import Loader from "../../Componets/Loader/Loader";
+import "./Home.css";
 
 const Home = () => {
   const recipes = useSelector((state) => state.recipes);
@@ -12,24 +13,24 @@ const Home = () => {
     if (!recipes.length) {
       dispatch(getRecipes());
     }
-  }, [dispatch, recipes]);
+  }, [dispatch]);
 
-  const handleOrder = (event) => {
-    dispatch(orderCards(event.target.value));
+  const handleClick = () => {
+    window.location.reload();
   };
 
   if (!recipes.length) {
     // Muestra un mensaje de carga mientras se obtienen las recetas
-    return <div>Cargando recetas...</div>;
+    return (
+      <div className="loaderContainer">
+        <Loader></Loader>
+      </div>
+    );
   }
 
   return (
     <>
-      <select onChange={handleOrder}>
-        <option value="A">A-Z</option>
-        <option value="B">Z-A</option>
-      </select>
-      <h1>Esta es la vista de Home</h1>
+      <button onClick={handleClick}>↻</button>
       <CardsContainer></CardsContainer>
     </>
   );
