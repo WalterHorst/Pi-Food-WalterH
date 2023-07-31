@@ -1,5 +1,6 @@
 import axios from "axios";
 
+export const SET_PAGE = "SET_PAGE";
 export const GET_RECIPES = "GET_RECIPES";
 export const SET_FOUND_RECIPE = "SET_FOUND_RECIPE";
 export const ORDER = "ORDER";
@@ -28,3 +29,8 @@ export const orderCards = (order) => {
 export const orderByDiets = (diet) => {
   return { type: ORDER_BY_DIETS, payload: diet };
 };
+
+export const setPage = (pageNumber) => ({
+  type: SET_PAGE,
+  payload: pageNumber,
+});

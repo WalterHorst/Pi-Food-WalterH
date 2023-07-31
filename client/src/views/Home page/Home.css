@@ -5,3 +5,23 @@
     align-content: center;
     
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+  }
+  
+  .pagination button {
+    margin: 0 8px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .pagination span {
+    font-weight: bold;
+  }
+  

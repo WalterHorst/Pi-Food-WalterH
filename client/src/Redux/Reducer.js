@@ -3,10 +3,12 @@ import {
   SET_FOUND_RECIPE,
   ORDER,
   ORDER_BY_DIETS,
+  SET_PAGE,
 } from "./Actions";
 
 const initialState = {
   recipes: [],
+  currentPage: 1,
 };
 console.log(initialState);
 
@@ -16,6 +18,8 @@ const reducer = (state = initialState, { type, payload }) => {
       return { ...state, recipes: payload };
     case SET_FOUND_RECIPE:
       return { ...state, recipes: payload };
+    case SET_PAGE:
+      return { ...state, currentPage: payload };
 
     case ORDER:
       const recipesCopy = [...state.recipes];

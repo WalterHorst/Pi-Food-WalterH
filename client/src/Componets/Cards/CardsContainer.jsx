@@ -2,8 +2,7 @@ import "./CardsContainer.css";
 import Card from "../Card/Card";
 import { useSelector } from "react-redux";
 
-const CardsContainer = () => {
-  const recipes = useSelector((state) => state.recipes);
+const CardsContainer = ({ recipes }) => {
   return (
     <div className="Container">
       {recipes.map((recipe) => {
