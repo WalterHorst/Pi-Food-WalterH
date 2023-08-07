@@ -1,12 +1,19 @@
 require("dotenv").config();
 const { API_KEY } = process.env;
 const axios = require("axios");
-const { Recipe } = require("../db");
+const { Recipe, Diet } = require("../db");
 
 const getRecipes = async (req, res) => {
   try {
     //   Busco todos los usuarios de la db
-    const databaseRecipes = await Recipe.findAll();
+    const databaseRecipes = await Recipe.findAll({
+      include: {
+        model: Diet,
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
+    });
+
     //Busco todos los usuarios de la api
     const { data } = await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`

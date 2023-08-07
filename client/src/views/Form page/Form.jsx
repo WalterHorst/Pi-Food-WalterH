@@ -2,15 +2,20 @@ import { useState } from "react";
 import "./Form.css";
 import validate from "../../validations";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Form = () => {
+  const diets = useSelector((state) => state.diets);
   const [form, setForm] = useState({
     name: "",
     resumen: "",
     healthScore: "",
     pasos: "",
     image: "",
+    diets: [],
   });
+
+  console.log(form);
 
   const [errors, setErrors] = useState({
     name: "",
@@ -20,10 +25,28 @@ const Form = () => {
     image: "",
   });
 
+  const [selectedDiets, setSelectedDiets] = useState([]); // Estado local para mantener las dietas seleccionadas
+
+  const checkboxChangeHandler = (event) => {
+    const value = event.target.value;
+
+    // Actualizar las dietas seleccionadas
+    if (event.target.checked) {
+      setSelectedDiets((prevSelected) => [...prevSelected, value]);
+    } else {
+      setSelectedDiets((prevSelected) =>
+        prevSelected.filter((diet) => diet !== value)
+      );
+    }
+    setForm({ ...form, diets: [...selectedDiets] });
+  };
+
   const changeHandler = (event) => {
     const property = event.target.name; //propiedad del estado form = name del imput
     const value = event.target.value; // guardo el valuo (cuando tipeo en el imput)
+
     setForm({ ...form, [property]: value }); //seteo el etado del formulario con las values correspondientes
+
     setErrors(validate({ ...form, [property]: value })); //llamo a la funcion validate pasandole lo mismo que al setForm para que nop ocurra un desfasaje
   };
 
@@ -86,6 +109,21 @@ const Form = () => {
         {errors.pasos && <p className="parrafo3">{errors.pasos}</p>}
       </div>
       <div className="container">
+        {/* Renderizar checkboxes para cada dieta */}
+        {diets.map((diet) => (
+          <label key={diet.id}>
+            <input
+              type="checkbox"
+              value={diet.name}
+              checked={selectedDiets.includes(diet.name)} // Marcar como seleccionado si está en la lista de dietas seleccionadas
+              name="diets"
+              onChange={checkboxChangeHandler}
+            />
+            {diet.name}
+          </label>
+        ))}
+      </div>
+      <div className="checkBox">
         <input
           type="file"
           value={form.image}

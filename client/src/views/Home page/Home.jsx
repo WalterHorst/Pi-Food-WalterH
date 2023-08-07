@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes, setPage } from "../../Redux/Actions";
+import { getRecipes, setPage, getDiets } from "../../Redux/Actions";
 import CardsContainer from "../../Componets/Cards/CardsContainer";
 import Loader from "../../Componets/Loader/Loader";
 import "./Home.css";
 
 const Home = () => {
+  const diets = useSelector((state) => state.diets);
   const recipes = useSelector((state) => state.recipes);
   const currentPage = useSelector((state) => state.currentPage);
   const recipesPerPage = 20; // Número de recetas por página
@@ -15,13 +16,16 @@ const Home = () => {
     if (!recipes.length) {
       dispatch(getRecipes());
     }
+    if (!diets.length) {
+      // Si no hay dietas en localStorage o en el estado, obtenerlas de la API
+      dispatch(getDiets());
+    }
   }, [dispatch]);
 
   const handleClick = () => {
     dispatch(setPage(1)); // Reiniciar el número de página al hacer clic en el botón de recarga
     window.location.reload();
   };
-
 
   // Función para obtener las recetas de la página actual
   const getCurrentRecipes = () => {

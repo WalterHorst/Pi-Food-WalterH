@@ -5,6 +5,15 @@ const axios = require("axios");
 
 const getDiets = async (req, res) => {
   try {
+    // Verificar si ya existen dietas en la base de datos
+    const existingDiets = await Diet.findAll();
+
+    if (existingDiets.length > 0) {
+      // Si hay dietas en la base de datos, devolverlas directamente
+      return res.status(200).json(existingDiets);
+    }
+
+    // Si no hay dietas en la base de datos, obtenerlas desde la API externa
     const { data } = await axios(
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=90`
     );
