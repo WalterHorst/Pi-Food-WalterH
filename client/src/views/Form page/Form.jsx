@@ -11,7 +11,7 @@ const Form = () => {
     resumen: "",
     healthScore: "",
     pasos: "",
-    image: "",
+    image: null,
     diets: [],
   });
 
@@ -22,7 +22,7 @@ const Form = () => {
     resumen: "",
     healthScore: "",
     pasos: "",
-    image: "",
+    image: null,
   });
 
   const [selectedDiets, setSelectedDiets] = useState([]); // Estado local para mantener las dietas seleccionadas
@@ -39,6 +39,11 @@ const Form = () => {
       );
     }
     setForm({ ...form, diets: [...selectedDiets] });
+  };
+
+  const setFile = (event) => {
+    const file = event.target.files[0];
+    setForm({ ...form, image: URL.createObjectURL(file) });
   };
 
   const changeHandler = (event) => {
@@ -58,12 +63,13 @@ const Form = () => {
   //funcion que previene el comportamiento default del submit (recargado de pagina) y hace la peticion post al backend
   const submitHandler = (event) => {
     event.preventDefault();
+
     axios
       .post("http://localhost:3001/recipes", form)
       .then((res) => alert(res.data))
       .catch((error) => alert(error));
 
-    setForm({ name: "", resumen: "", healthScore: "", pasos: "", image: "" });
+    setForm({ name: "", resumen: "", healthScore: "", pasos: "", image: null });
   };
 
   return (
@@ -124,12 +130,8 @@ const Form = () => {
         ))}
       </div>
       <div className="checkBox">
-        <input
-          type="file"
-          value={form.image}
-          name="image"
-          onChange={changeHandler}
-        ></input>
+        <input type="file" name="image" onChange={setFile}></input>
+        {form.image && <img src={form.image} alt={form.name} />}
       </div>
       <button type="submit" disabled={!isFormValid()}>
         Crear receta
